@@ -129,11 +129,15 @@ def load_G4electron_data(root_file, Normalized=True, edep_min = 100, scale = 'no
 
 
 
-def rtnpy_load_data(filename, Normalized = True, from_numpy=True, num_events = 10, image_size = [32,64], Save = True):
+def rtnpy_load_data(filename, Normalized = True, from_numpy=True, num_events = 10, image_size = [32,64], Save = True, from_compressed = True):
 
 
     if from_numpy == True:
         image_array = np.load(filename)
+        if from_compressed == True:
+            image_array = image_array['array']
+
+        # get rid of any corrupt files
         nans_list = []
         for i in range(image_array.shape[0]):
             if np.isnan(image_array[i][0]).any():
