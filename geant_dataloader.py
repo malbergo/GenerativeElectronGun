@@ -135,7 +135,9 @@ def rtnpy_load_data(filename, Normalized = True, from_numpy=True, num_events = 1
     if from_numpy == True:
         image_array = np.load(filename)
         if from_compressed == True:
-            image_array = image_array['array']
+            image_array = np.load(filename)['array']
+        else:
+            image_array = np.load(filename)
 
         # get rid of any corrupt files
         nans_list = []
