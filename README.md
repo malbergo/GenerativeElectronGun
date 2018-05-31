@@ -9,4 +9,13 @@ Otherwise, to run, one needs PyTorch 0.4. There are other packages that you shou
 
 The code will try to save image files during training, and it will declare the directory to save them to right before training begins. just set mydir = None to prevent this and comment out the lines that try to make the directory based off the date and time.
 
+
+
+Here is example GAN output:
+
 ![image](GANGenerator64x64Sample.png)
+
+
+Here is convolutional autoencoding
+
+![image](DCAE_EdepFor30Events_10latentDim_32x32Image_Epoch29_unifNormalized_32batchSize.png)
