@@ -18,4 +18,4 @@ Here is example GAN output:
 
 Here is convolutional autoencoding
 
-![image](DCAE_EdepFor30Events_10latentDim_32x32Image_Epoch29_unifNormalized_32batchSize.png)
+![image](DCAE_EdepFor30Events_10latentDim_32x32Image_Epoch29_unifNormalized_32batchSize_edited.png)
