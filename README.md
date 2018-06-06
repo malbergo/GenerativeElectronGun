@@ -19,3 +19,10 @@ Here is example GAN output:
 Here is convolutional autoencoding
 
 ![image](DCAE_EdepFor30Events_10latentDim_32x32Image_Epoch29_unifNormalized_32batchSize_edited.png)
+
+
+
+Here are real samples followed by samples from a fully connected VAE.
+![image](regularVAE_20latentdim_noNorm_10realSamples.png)
+
+![image](regularVAE_20latentdim_noNorm_10newSamples_withLeakyRelu05.png)
