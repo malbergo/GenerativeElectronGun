@@ -25,4 +25,8 @@ Here is convolutional autoencoding
 Here are real samples followed by samples from a fully connected VAE.
 ![image](regularVAE_20latentdim_noNorm_10realSamples.png)
 
-![image](regularVAE_20latentdim_noNorm_10newSamples_withLeakyRelu05.png)
+![image](VAE10fakeSamplesEdepOver10Events_32x32Image_Epoch100_noneNormalized_32batchSize.png)
+
+Here are decoded samples compared to their ground truth for the same VAE
+
+![image](VAE_EdepFor7Events_128latentDim_32x32Image_Epoch100_noneNormalized_32batchSize.png)
