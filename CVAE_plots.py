@@ -500,11 +500,11 @@ def plot_difference(real_fake_list, epoch, imageSize, n_events = 500, save_dir =
 
     fig, ax=plt.subplots(figsize=(6, 6))
     #plt.hist2d(fake.to('cpu').detach().numpy()[0][0][:,0], fake.to('cpu').detach().numpy()[0][0][:,1])
-    im = ax.imshow(test_unnormed, vmin = vmin,vmax = vmax, extent=extent, origin='lower', cmap='PuOr', label ='VAE')
+    im = ax.imshow(test_unnormed, vmin = vmin,vmax = vmax, extent=extent, origin='lower', cmap='PuOr', label ='CVAE')
     cbar = plt.colorbar(im, fraction=0.05, pad=0.05)
     cbar.set_label(r'Pixel $E_{dep}$ (MeV)', y=0.85)
     plt.title(r"$E_{avg}^{G4} - E_{avg}^{CVAE}$, Epoch " + str(epoch))
-    ax.text(-45, 39, 'VAE', color='black', 
+    ax.text(-45, 39, 'CVAE', color='black', 
         bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'))
     #plt.legend(loc = 'best')
     ax.set_xlim(tlim)
@@ -551,7 +551,7 @@ def plot_FWHMs(gen_FWHMs, real_FWHMs, epochs, n_epochs, save_dir = None):
 
 
 
-    print(type(bs))
+    #print(type(bs))
     FWHM_comp =  "FWHMComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".png"
     fig = plt.figure(figsize=(5,5))
     plt.scatter(epochs, real_FWHMs, alpha = 0.8, label='Geant4')
@@ -654,7 +654,7 @@ def plot_losses(train_losses, test_losses, epochs , n_epochs, save_dir = None):
 
 
 
-    print(type(bs))
+    #print(type(bs))
     FWHM_comp =  "LossesComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".png"
     fig = plt.figure(figsize=(6,4))
     plt.scatter(epochs, train_losses, alpha = 0.8, label='train')
