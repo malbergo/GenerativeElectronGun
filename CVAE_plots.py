@@ -81,7 +81,7 @@ def plot_avg(data, n_events, epoch, imageSize, last_decode_act, withMarginals=Tr
         cbar.set_label(r'Pixel $E_{dep}$ (MeV)', y=0.85)
         if save_dir != None:
             #directory = "/home/chris/Documents/MPhilProjects/ForViewing/Geant4/SingleLayerEGun/AverageImage/"
-            filename = "CVAE_AvgEdepOver" + str(n_events) + "Events_Epochs" + str(epoch) +" .png" 
+            filename = "CVAE_AvgEdepOver" + str(n_events) + "Events_Epochs" + str(epoch) +" .pdf" 
             plt.savefig(directory + filename)
         
     else:
@@ -140,7 +140,7 @@ def plot_avg(data, n_events, epoch, imageSize, last_decode_act, withMarginals=Tr
         if save_dir != None:
             #learning_rate = '%.0E' % Decimal(lr)
             #directory = "/home/chris/Documents/MPhilProjects/ForViewing/plots/Geant4/SingleLayerEGun/VAE/"
-            filename = "CVAE_AvgEdep"+str(marginals_str) + "Over" + str(n_events) + "Events_Epoch" + str(epoch) + ".png"
+            filename = "CVAE_AvgEdep"+str(marginals_str) + "Over" + str(n_events) + "Events_Epoch" + str(epoch) + ".pdf"
             plt.savefig(save_dir + filename, bbox_inches='tight')
         plt.show()
     return
@@ -297,7 +297,7 @@ def plot_avg_both(real_data, fake_data, n_events, epoch, imageSize,withMarginals
     if save_dir != None:
         #learning_rate = '%.0E' % Decimal(lr)
         #directory = "/home/chris/Documents/MPhilProjects/ForViewing/plots/Geant4/SingleLayerEGun/VAE/"
-        filename = "CVAE_RealandFakeAvgEdep"+str(withMarginals) + "Over" + str(n_events) + "Events_Epoch" +  str(epoch) + ".png"
+        filename = "CVAE_RealandFakeAvgEdep"+str(withMarginals) + "Over" + str(n_events) + "Events_Epoch" +  str(epoch) + ".pdf"
         plt.savefig(save_dir + filename, bbox_inches='tight')
     plt.show()
     return
@@ -332,9 +332,16 @@ def samples(source, epoch, conds, zdim,  beta, norm_scale , scale, imageSize, la
         gen_sample = source.decode(sample_conds).cpu()
         #sample = model.decode(sample).cpu()
         data = unnormalize(gen_sample.view(64, 1, imageSize, imageSize).detach().numpy().squeeze(), norm_scale = norm_scale, scale = scale)
+
+
+    cmap = plt.cm.copper_r
+    #cmap = sns.cubehelix_palette(dark = 0.4, light=0.915, gamma = 2.5, hue = 1, start =0, as_cmap=True)
+    #real_data = np.ma.masked_where(real_data < 0.001, real_data)
+    #data = np.ma.masked_where(data < 0.0001, data)
+    cmap.set_bad(color='white')
     
         
-    cmap = sns.cubehelix_palette(dark = 0.4, light=0.965, gamma = 2.5, hue = 1, start =0, as_cmap=True)
+    #cmap = sns.cubehelix_palette(dark = 0.4, light=0.965, gamma = 2.5, hue = 1, start =0, as_cmap=True)
     
     if (rows == 1) and (columns == 1):
 
@@ -430,7 +437,7 @@ def samples(source, epoch, conds, zdim,  beta, norm_scale , scale, imageSize, la
         if rows==1 and columns ==1:
             fig.suptitle(r"$\beta$-CVAE,$\quad$ $\beta=$"+str(beta), y=0.95)
         else:
-            fig.suptitle("CVAE Samples of Generated Electron Gun Energy Depositions, Epoch " + str(epoch), y=0.95)
+            fig.suptitle(r"$\beta$-CVAE Samples of Generated Electron Gun Energy Depositions, $\beta$ =  " +str(beta), y=0.95, fontsize=14)
 
     num_samples = rows * columns
 
@@ -443,7 +450,7 @@ def samples(source, epoch, conds, zdim,  beta, norm_scale , scale, imageSize, la
 
         #learning_rate = '%.0E' % Decimal(lr)
         #directory = "/home/chris/Documents/MPhilProjects/ForViewing/plots/Geant4/SingleLayerEGun/VAE/"
-        filename = "CVAE"+str(num_samples) + type_string+ "SamplesEdepOver_Epoch" + str(epoch)  + ".png"
+        filename = "CVAE"+str(num_samples) + type_string+ "SamplesEdepOver_Epoch" + str(epoch)  + ".pdf"
         #print(save_dir)
         plt.savefig(save_dir + filename, bbox_inches='tight')
 
@@ -521,7 +528,7 @@ def plot_difference(real_fake_list, epoch, imageSize, n_events = 500, save_dir =
     if save_dir != None:
         #learning_rate = '%.0E' % Decimal(lr)
 
-        filename = "CVAE_EdepDifferenceOver" + str(n_events) + "Events_Epoch" + str(epoch) + ".png"
+        filename = "CVAE_EdepDifferenceOver" + str(n_events) + "Events_Epoch" + str(epoch) + ".pdf"
         plt.savefig(save_dir + filename, bbox_inches='tight')
 
     plt.show()
@@ -529,7 +536,7 @@ def plot_difference(real_fake_list, epoch, imageSize, n_events = 500, save_dir =
 
 # plot all the sum differences, appended into a list by calc_sum_difference function
 def plot_sum_difference(sum_diffs, epochs, n_epochs, save_dir = None):
-    filename =  "SummedDifferenceComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".png"
+    filename =  "SummedDifferenceComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".pdf"
     fig = plt.figure(figsize=(5,5))
     plt.scatter(epochs, sum_diffs, alpha = 0.8)
     #plt.scatter(epochs, gen_FWHMs, alpha = 0.8,  label='VAE')
@@ -552,7 +559,7 @@ def plot_FWHMs(gen_FWHMs, real_FWHMs, epochs, n_epochs, save_dir = None):
 
 
     #print(type(bs))
-    FWHM_comp =  "FWHMComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".png"
+    FWHM_comp =  "FWHMComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".pdf"
     fig = plt.figure(figsize=(5,5))
     plt.scatter(epochs, real_FWHMs, alpha = 0.8, label='Geant4')
     plt.scatter(epochs, gen_FWHMs, alpha = 0.8,  label='CVAE')
@@ -639,7 +646,7 @@ def plot_all_metrics(gen_FWHMs, g4_FWHMs, gen_means, g4_means, epochs, n_epochs,
 
 
     if save_dir != None:
-        FWHMs_Means_comp = "FHWMsMeans_Edep_EGunCVAE_Epoch" + str(len(epochs)) + ".png"
+        FWHMs_Means_comp = "FHWMsMeans_Edep_EGunCVAE_Epoch" + str(len(epochs)) + ".pdf"
 
         #file_path = "/home/chris/Documents/MPhilProjects/ForViewing/plots/eGunPTSmearing/FWHMsMeans/"
         plt.savefig(save_dir + FWHMs_Means_comp, bbox_inches="tight")
@@ -655,7 +662,7 @@ def plot_losses(train_losses, test_losses, epochs , n_epochs, save_dir = None):
 
 
     #print(type(bs))
-    FWHM_comp =  "LossesComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".png"
+    FWHM_comp =  "LossesComp_Egun_Edep_CVAE_Epoch" + str(len(epochs)) + ".pdf"
     fig = plt.figure(figsize=(6,4))
     plt.scatter(epochs, train_losses, alpha = 0.8, label='train')
     plt.scatter(epochs, test_losses, alpha = 0.8,  label='test')

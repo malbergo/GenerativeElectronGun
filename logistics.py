@@ -96,6 +96,10 @@ def normalize(data_arr, norm_scale = 'unif'):
 		data_normed, scale = uniform_range_normalize(data_arr)
 	elif (norm_scale == '-1to1'):
 		data_normed, scale = uniform_range_normalize(data_arr, low=-1.,high=1.)
+	elif (norm_scale == '1to10'):
+		data_normed, scale = uniform_range_normalize(data_arr, low=1.,high=10.)
+	elif (norm_scale == '0to5'):
+		data_normed, scale = uniform_range_normalize(data_arr, low=0.,high=5.)
 	elif norm_scale == 'tanh':
 		data_normed, scale = tanh_normalize(data_arr)
 	elif norm_scale == 'sigmoid':
@@ -107,13 +111,17 @@ def normalize(data_arr, norm_scale = 'unif'):
 	return data_normed, scale
 
 
-def unnormalize(data_arr, scale, norm_scale = 'unif'):
+def unnormalize(data_arr, scale, norm_scale ):
 
 	#print norm_scale
 	if norm_scale == 'unif':
 		data_unnormed = uniform_range_unnormalize(data_arr, scale)
 	elif norm_scale == '-1to1':
 		data_unnormed = uniform_range_unnormalize(data_arr, scale, low = -1., high =1.)
+	elif norm_scale == '1to10':
+		data_unnormed = uniform_range_unnormalize(data_arr, scale, low = 1., high =10.)
+	elif norm_scale == '0to5':
+		data_unnormed = uniform_range_unnormalize(data_arr, scale, low = 0., high =5.)
 	elif norm_scale == 'tanh':
 		data_unnormed = arctanh_unnormalize(data_arr, scale)
 	elif norm_scale == 'sigmoid':
