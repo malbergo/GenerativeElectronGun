@@ -14,7 +14,7 @@ The code will try to save image files during training, and it will declare the d
 Here is example GAN output:
 
 ![image](GANGenerator64x64Sample.png)
-
+![image](DCWGANSampleImages.png)
 
 Here is convolutional autoencoding
 
